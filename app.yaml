@@ -1,0 +1,32 @@
+application: helloworld
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /
+  static_files: index.html
+  upload: index.html
+
+- url: /never_expire.html
+  static_files: never_expire.html
+  upload: never_expire.html
+  expiration: "365d"
+
+- url: /(.*\.html)
+  static_files: \1
+  upload: (.*\.html)
+
+- url: /(.*\.appcache)
+  static_files: \1
+  mime_type: text/cache-manifest
+  upload: (.*\.appcache)
+
+
+# - url: /.*
+#   script: html5_app_cache_test.app
+
+# libraries:
+# - name: jinja2
+#   version: latest # 2.6
